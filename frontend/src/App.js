@@ -38,7 +38,7 @@ function App() {
         body: JSON.stringify({ text })
       });
       
-      // FIX: Destructure 'summary' directly to avoid 'data' being unused
+      // This part was already correct, as 'summary' was destructured in the worker response
       const { summary } = await response.json(); 
       setSummary(summary || 'Summary not available');
     } catch (error) {
@@ -86,7 +86,9 @@ function App() {
         })
       });
       
-      const data = await response.json();
+      // FIX: Destructure 'data' or remove it if not needed.
+      // Since 'data' is not used after this line, we can simply remove the assignment.
+      await response.json(); // Just consume the response, no need to assign to 'data'
       alert('Content saved successfully!');
       
       // Clear form and refresh saved content

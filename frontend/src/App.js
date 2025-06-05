@@ -38,8 +38,9 @@ function App() {
         body: JSON.stringify({ text })
       });
       
-      const data = await response.json();
-      setSummary(data.summary || 'Summary not available');
+      // FIX: Destructure 'summary' directly to avoid 'data' being unused
+      const { summary } = await response.json(); 
+      setSummary(summary || 'Summary not available');
     } catch (error) {
       console.error('Error summarizing:', error);
       setSummary('Error generating summary');
